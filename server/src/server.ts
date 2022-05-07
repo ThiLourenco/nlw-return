@@ -8,5 +8,3 @@ app.use(routes);
 app.listen(3333, () =>{
   console.log('HTTP Server Running!! 🔥🔥');
 });
-
-
