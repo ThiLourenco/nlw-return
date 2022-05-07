@@ -1,8 +1,10 @@
-import { CloseButton } from "./CloseButton";
+import { useState } from "react";
+import { CloseButton } from "../CloseButton";
 
 import bugImagemUrl from '../assets/bug.svg';
 import ideaImagemUrl from '../assets/idea.svg';
 import thoughtImagemUrl from '../assets/thought.svg';
+
 
 const feedbackTypes = {
   BUG: {
@@ -28,16 +30,10 @@ const feedbackTypes = {
   },
 };
 
-// Object.entries(feedbackTypes) =>
-/**
- * [
- *  ['BUG', {...}],
- *  ['IDEA', {...}],
- *  ['THOUGHT', {...}]
- * ]
- */
+type FeedbackType = keyof typeof feedbackTypes;
 
 export function WidgetFrom() {
+  const [feedbackType, setfeedbackType] = useState<FeedbackType | null>(null)
   return (
     <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
       <header>
@@ -45,16 +41,25 @@ export function WidgetFrom() {
         <CloseButton />
       </header>
 
-      <div className="flex py-8 gap-8 w-full">
+      {!feedbackType ? (
+        <div className="flex py-8 gap-8 w-full">
         { Object.entries(feedbackTypes).map(([key, value]) => {
           return (
-            <button>
+            <button
+            key={key} // id distinct images
+              className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2 border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:outline-none " //effect border transparent with hover and acessibility
+              onClick={() => setfeedbackType(key as FeedbackType)}
+              type="button"
+            >
               <img src={value.image.source} alt={value.image.alt} />
               <span>{value.title}</span>
             </button>
           ) 
         }) }
       </div>
+      ) : (
+        <p>Hello World</p>
+      )}
 
       <footer className="text-xs text-neutral-400">
         Feito com ♥ por <a className="underline underline-offset-2" href="#">Thiago Lourenço</a>
