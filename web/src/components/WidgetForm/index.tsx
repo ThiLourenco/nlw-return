@@ -63,7 +63,7 @@ export function WidgetFrom() {
       )}
 
       <footer className="text-xs text-neutral-400">
-        Feito com ♥ por <a className="underline underline-offset-2" href="#">Rockeseat</a>
+        Feito com ♥ pela <a className="underline underline-offset-2" href="#">Rocketseat</a>
       </footer>
     </div>
   );
